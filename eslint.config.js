@@ -18,7 +18,7 @@ export default tsEslint.config(
     },
   },
   {
-    ignores: ['node_modules', 'dist', 'eslint.config.js'],
+    ignores: ['node_modules', 'dist'],
   },
   js.configs.recommended,
   ...tsEslint.configs.recommended,
@@ -30,20 +30,18 @@ export default tsEslint.config(
         ...globals.es2020,
       },
       parserOptions: {
-        project: ['tsconfig.json', 'tsconfig.node.json'],
+        project: ['./tsconfig.json', './tsconfig.node.json'],
       },
     },
   },
   {
     files: ['**/*.{ts,tsx}'],
     rules: {
-      // @ts-ignore
-      ...prettierPlugin.configs?.recommended.rules,
+      ...prettierPlugin.configs.recommended.rules,
       ...eslintConfigPrettier.rules,
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'prefer-const': 'error',
       'react/jsx-curly-brace-presence': ['warn', { props: 'never', children: 'never' }],
-      'react/function-component-definition': ['warn', { namedComponents: 'arrow-function' }],
       'react/self-closing-comp': ['error', { component: true, html: true }],
       'max-lines': ['warn', { max: 124 }],
     },
