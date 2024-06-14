@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Film } from '../../types';
+import { FilmsData } from '../../types';
 import { RootState } from '../store';
 import axios from 'axios';
 
@@ -9,15 +9,16 @@ const headers = {
   'X-API-KEY': import.meta.env.VITE_API_KEY,
 };
 
-export const fetchAllFilms = createAsyncThunk<Film[], void, { rejectValue: string }>(
+export const fetchAllFilms = createAsyncThunk<FilmsData, {page:number, limit: number}, { rejectValue: string }>(
   'films/films',
-  async (_, { rejectWithValue }) => {
+  async ({page, limit}, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${URL}/movie`, {
+      const response = await axios.get(`${URL}/movie?page=${page}&limit=${limit}`, {
         headers,
       });
-      const films = await response.data;
-      return films.docs;
+      const data:FilmsData = await response.data;
+      console.log(data)
+      return data;
     } catch (error) {
       console.log(error);
       if (axios.isAxiosError(error)) {
@@ -29,13 +30,13 @@ export const fetchAllFilms = createAsyncThunk<Film[], void, { rejectValue: strin
 );
 
 type InitialStateType = {
-  films: Film[] | null;
+  data: FilmsData | null;
   errorMessage: string;
   loading: 'idle' | 'loading';
 };
 
 const initialState: InitialStateType = {
-  films: null,
+  data: null,
   errorMessage: '',
   loading: 'idle',
 };
@@ -51,18 +52,18 @@ export const apiSlice = createSlice({
         state.loading = 'loading';
       })
       .addCase(fetchAllFilms.fulfilled, (state, action) => {
-        state.films = action.payload;
+        state.data = action.payload;
         state.errorMessage = '';
         state.loading = 'idle';
       })
       .addCase(fetchAllFilms.rejected, (state, action) => {
-        state.films = [];
+        state.data = null;
         state.errorMessage = action.payload || 'unknown error';
         state.loading = 'idle';
       });
   },
 });
 
-export const selectFilms = (state: RootState) => state.films.films;
+export const selectFilmsData = (state: RootState) => state.films.data;
 
 export default apiSlice.reducer;
