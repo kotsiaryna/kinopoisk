@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-import { useAppDispatch} from '../../store/hooks';
+import { useAppDispatch } from '../../store/hooks';
 import { fetchAllFilms } from '../../store/features/filmsSlice';
 import FilmList from './FilmList.tsx/FilmList';
 import Pagination from './Pagination/Pagination';
 import LimitPerPage from './LimitPerPage/LimitPerPage';
 import { useSearchParams } from 'react-router-dom';
-
 
 function Home() {
   const [query, setQuery] = useSearchParams();
@@ -21,7 +20,7 @@ function Home() {
   return (
     <>
       <div>FILMS</div>
-      <Pagination />
+      <Pagination query={query} changeQuery={setQuery} />
       <LimitPerPage query={query} changeQuery={setQuery} />
       <FilmList />
     </>
