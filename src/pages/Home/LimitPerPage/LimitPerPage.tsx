@@ -1,13 +1,13 @@
-import { ChangeEventHandler } from 'react';
+import { ChangeEventHandler, memo } from 'react';
 import { SetURLSearchParams } from 'react-router-dom';
 
 type Props = {
-  query: URLSearchParams;
+  limit: string;
   changeQuery: SetURLSearchParams;
 };
 
-function LimitPerPage({ query, changeQuery }: Props) {
-  const limit = query.get('limit') || 10;
+function LimitPerPage({ limit, changeQuery }: Props) {
+  console.log('render Limits');
 
   const setQuery: ChangeEventHandler<HTMLSelectElement> = (e) => {
     changeQuery((query) => {
@@ -29,4 +29,5 @@ function LimitPerPage({ query, changeQuery }: Props) {
   );
 }
 
-export default LimitPerPage;
+const MemoLimits = memo(LimitPerPage);
+export default MemoLimits;
