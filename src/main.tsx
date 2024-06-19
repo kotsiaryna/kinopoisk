@@ -6,6 +6,8 @@ import Home from './pages/Home/Home.tsx';
 import Film from './pages/Film/Film.tsx';
 import { Provider } from 'react-redux';
 import { store } from './store/store.ts';
+import { filmById } from './services/api.ts';
+import ErrorElement from './pages/Film/ErrorElement/ErrorElement.tsx';
 
 const router = createBrowserRouter([
   {
@@ -15,6 +17,8 @@ const router = createBrowserRouter([
   {
     path: '/film/:id',
     element: <Film />,
+    loader: filmById,
+    errorElement: <ErrorElement />,
   },
 ]);
 
