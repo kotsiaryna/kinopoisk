@@ -1,37 +1,9 @@
 import { useState } from 'react';
 import { Person } from '../../../types';
+import { Pages } from '../Pages/Pages';
 
 type Props = {
   persons: Person[];
-};
-type PagesProps = {
-  n: number;
-  length: number;
-  onButtonClick: (n: number) => void;
-};
-const Pages = ({ n, length, onButtonClick }: PagesProps) => {
-  const [activePage, setActivePage] = useState(1);
-
-  const pagesNumber = Math.ceil(length / n);
-  const buttons = new Array(pagesNumber).fill(0);
-
-  return (
-    <div>
-      {buttons.map((_, i) => (
-        <button
-          key={i}
-          onClick={(e) => {
-            const currPage = parseInt((e.target as HTMLButtonElement).textContent || '');
-            onButtonClick(currPage);
-            setActivePage(currPage);
-          }}
-          disabled={activePage === i + 1}
-        >
-          {i + 1}
-        </button>
-      ))}
-    </div>
-  );
 };
 
 const Actors = ({ persons }: Props) => {
