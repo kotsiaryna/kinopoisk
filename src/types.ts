@@ -23,7 +23,7 @@ export type Person = {
   profession: string;
 };
 
-type MoVie = {
+export type Movie = {
   id: number;
   name: string;
   poster: { previewUrl: string };
@@ -31,7 +31,7 @@ type MoVie = {
 export interface FilmByID extends Film {
   rating: { imdb: number; kp: number };
   persons: Person[];
-  similarMovies: MoVie[];
+  similarMovies: Movie[];
 }
 
 export interface Review {
@@ -50,4 +50,8 @@ export interface ReviewData {
   page: number;
   pages: number;
   total: number;
+}
+
+export interface Poster {
+  previewUrl: string;
 }
