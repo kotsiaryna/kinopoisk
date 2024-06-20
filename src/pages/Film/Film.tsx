@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { FilmByID } from '../../types';
 import Actors from './Actors/Actors';
 import NotFound from './NotFound/NotFound';
@@ -21,8 +21,11 @@ function Film() {
 
   const actors = persons.filter((person) => person.profession === 'актеры');
 
+  const query = localStorage.getItem('q') || '';
+
   return (
     <section>
+      <Link to={`/${query}`}>На главную</Link>
       <h2>{name}</h2>
       {poster && poster.previewUrl && <img src={poster.previewUrl} width="200" height="auto" />}
       <div>{description}</div>

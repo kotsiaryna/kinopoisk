@@ -35,6 +35,9 @@ function Home() {
         country,
       }),
     );
+    return () => {
+      localStorage.setItem('q', `?${query.toString()}`);
+    };
   }, [page, limit, search, year, ageRating, country]);
 
   return (
