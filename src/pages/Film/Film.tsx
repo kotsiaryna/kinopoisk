@@ -1,12 +1,16 @@
-import { Link, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import { FilmByID } from '../../types';
 import Actors from './Actors/Actors';
 import NotFound from './NotFound/NotFound';
+import ReviewList from './Review/ReviewList';
+import SimilarMovies from './SimilarMovies/SimilarMovies';
+import Posters from './Posters/Posters';
 
 function Film() {
   const film = useLoaderData() as FilmByID;
   console.log(film);
   const {
+    id,
     name,
     description,
     poster,
@@ -28,16 +32,16 @@ function Film() {
         {actors.length ? <Actors persons={persons} /> : <NotFound name="актерах" />}
       </div>
       <div>
+        <h4>Постеры</h4>
+        <Posters filmId={id} />
+      </div>
+      <div>
+        <h4>Отзывы</h4>
+        <ReviewList filmID={id} />
+      </div>
+      <div>
         <h4>Похожие фильмы</h4>
-        {similarMovies ? (
-          similarMovies.map((movie, i) => (
-            <Link key={i} to={`/film/${movie.id}`}>
-              {movie.name}
-            </Link>
-          ))
-        ) : (
-          <p>Нет информации о фильмах</p>
-        )}
+        {similarMovies && <SimilarMovies movies={similarMovies} />}
       </div>
     </section>
   );
