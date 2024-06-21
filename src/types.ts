@@ -16,13 +16,7 @@ export interface Film {
     previewUrl: string;
   };
 }
-export interface FilmsData {
-  docs: Film[];
-  limit: number;
-  page: number;
-  pages: number;
-  total: number;
-}
+
 export type Person = {
   id: number;
   photo: string;
@@ -50,14 +44,6 @@ export interface Review {
   review: string;
   date: string;
   author: string;
-}
-
-export interface ReviewData {
-  docs: Review[];
-  limit: number;
-  page: number;
-  pages: number;
-  total: number;
 }
 
 export interface Poster {

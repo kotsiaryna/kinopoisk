@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FilmByID, Poster, ResponseData, ReviewData, Series } from '../types';
+import { FilmByID, Poster, ResponseData, Review, Series } from '../types';
 import { LoaderFunction } from 'react-router-dom';
 
 const URL = 'https://api.kinopoisk.dev/v1.4';
@@ -36,7 +36,7 @@ export const reviewByFilmId = async (id: number, page: number) => {
       headers,
     });
     const data = await resp.data;
-    return data as ReviewData;
+    return data as ResponseData<Review[]>;
   } catch (error) {
     console.log(error);
     if (axios.isAxiosError(error)) {

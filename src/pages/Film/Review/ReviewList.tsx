@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { reviewByFilmId } from '../../../services/api';
-import { ReviewData } from '../../../types';
 import ReviewItem from './Review';
 import { Pages } from '../Pages/Pages';
+import { ResponseData, Review } from '../../../types';
 
 type Props = {
   filmID: number;
@@ -10,7 +10,7 @@ type Props = {
 
 function ReviewList({ filmID }: Props) {
   const limit = 5;
-  const [reviews, setReviews] = useState<ReviewData | null>(null);
+  const [reviews, setReviews] = useState<ResponseData<Review[]> | null>(null);
   const [error, setError] = useState(false);
 
   const [page, setPage] = useState(1);
@@ -22,7 +22,7 @@ function ReviewList({ filmID }: Props) {
         setError(false);
       })
       .catch(() => setError(true));
-  }, [page]);
+  }, [page, filmID]);
 
   const onPageClick = (n: number) => {
     setPage(n);
