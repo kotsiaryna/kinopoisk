@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FilmByID, Poster, ReviewData } from '../types';
+import { FilmByID, Poster, ResponseData, ReviewData, Series } from '../types';
 import { LoaderFunction } from 'react-router-dom';
 
 const URL = 'https://api.kinopoisk.dev/v1.4';
@@ -55,6 +55,24 @@ export const postersByFilmId = async (id: number) => {
     });
     const data = await resp.data;
     return data.docs as Poster[];
+  } catch (error) {
+    console.log(error);
+    if (axios.isAxiosError(error)) {
+      console.log(error.message);
+      return null;
+    }
+    console.log('unknown error');
+    return null;
+  }
+};
+
+export const seasonsByFilmId = async (id: number, page: number) => {
+  try {
+    const resp = await axios.get(`${URL}/season?page=${page}&limit=1&movieId=${id}`, {
+      headers,
+    });
+    const data = await resp.data;
+    return data as ResponseData<Series[]>;
   } catch (error) {
     console.log(error);
     if (axios.isAxiosError(error)) {

@@ -1,3 +1,10 @@
+export interface ResponseData<T> {
+  docs: T;
+  limit: number;
+  page: number;
+  pages: number;
+  total: number;
+}
 export interface Film {
   id: number;
   name: string;
@@ -32,6 +39,7 @@ export interface FilmByID extends Film {
   rating: { imdb: number; kp: number };
   persons: Person[];
   similarMovies: Movie[];
+  isSeries: boolean;
 }
 
 export interface Review {
@@ -54,4 +62,17 @@ export interface ReviewData {
 
 export interface Poster {
   previewUrl: string;
+}
+type Episode = {
+  number: number;
+  name: string;
+  enName: string;
+};
+export interface Series {
+  number: number;
+  episodesCount: number;
+  description?: string;
+  enDescription?: string;
+  airDate?: string;
+  episodes: Episode[];
 }

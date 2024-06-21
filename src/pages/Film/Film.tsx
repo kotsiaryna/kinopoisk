@@ -5,6 +5,7 @@ import NotFound from './NotFound/NotFound';
 import ReviewList from './Review/ReviewList';
 import SimilarMovies from './SimilarMovies/SimilarMovies';
 import Posters from './Posters/Posters';
+import Seasons from './Seasons/Seasons';
 
 function Film() {
   const film = useLoaderData() as FilmByID;
@@ -17,6 +18,7 @@ function Film() {
     rating: { imdb, kp },
     persons,
     similarMovies,
+    isSeries,
   } = film;
 
   const actors = persons.filter((person) => person.profession === 'актеры');
@@ -33,6 +35,10 @@ function Film() {
       <div>
         <h4>Актеры</h4>
         {actors.length ? <Actors persons={persons} /> : <NotFound name="актерах" />}
+      </div>
+      <div>
+        <h4>Сезоны и серии</h4>
+        {isSeries ? <Seasons filmId={id} /> : <NotFound name="сезонах" />}
       </div>
       <div>
         <h4>Постеры</h4>
