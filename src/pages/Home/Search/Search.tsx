@@ -1,5 +1,6 @@
-import { ChangeEventHandler, memo } from 'react';
+import { ChangeEventHandler, memo, useEffect, useState } from 'react';
 import { SetURLSearchParams } from 'react-router-dom';
+import useDebounce from '../../../hooks/useDebounce';
 
 type Props = {
   search: string;
@@ -7,18 +8,29 @@ type Props = {
 };
 
 function Search({ search, changeQuery }: Props) {
-  console.log('render Search');
+  const [value, setValue] = useState(search);
+  const debouncedValue = useDebounce(value, 1000);
 
-  const setQuery: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setValue(e.target.value);
+  };
+
+  useEffect(() => {
     changeQuery((query) => {
-      query.set('search', e.target.value);
+      if (debouncedValue) {
+        query.set('search', debouncedValue || '');
+      } else {
+        query.delete('search');
+      }
+
       return query;
     });
-  };
+  }, [debouncedValue]);
+
   return (
     <label>
       Search
-      <input value={search} onChange={setQuery} />
+      <input type="search" value={value} onChange={handleChange} />
     </label>
   );
 }

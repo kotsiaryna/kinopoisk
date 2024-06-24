@@ -1,5 +1,6 @@
-import { ChangeEventHandler, memo } from 'react';
+import { ChangeEventHandler, memo, useEffect, useState } from 'react';
 import { SetURLSearchParams } from 'react-router-dom';
+import useDebounce from '../../../hooks/useDebounce';
 
 type Props = {
   country: string;
@@ -7,16 +8,28 @@ type Props = {
 };
 
 function Country({ country, changeQuery }: Props) {
-  const setCountry: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const [value, setValue] = useState(country);
+  const debouncedValue = useDebounce(value);
+
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setValue(e.target.value);
+  };
+
+  useEffect(() => {
     changeQuery((query) => {
-      query.set('country', e.target.value);
+      if (debouncedValue) {
+        query.set('country', debouncedValue || '');
+      } else {
+        query.delete('country');
+      }
+
       return query;
     });
-  };
+  }, [debouncedValue]);
   return (
     <label>
       Страна
-      <input type="text" value={country} onChange={setCountry} />
+      <input type="search" value={value} onChange={handleChange} />
     </label>
   );
 }
