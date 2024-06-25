@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Person } from '../../../types';
 import { Pages } from '../Pages/Pages';
+import { withHeading, withNotFound } from '../../../components/HOC';
 
 type Props = {
   persons: Person[];
@@ -11,7 +12,6 @@ const Actors = ({ persons }: Props) => {
   const [actorsToShow, setActorsToShow] = useState(persons.slice(0, limit));
 
   const onPageClick = (page: number) => {
-    // const page = +(e.target as HTMLButtonElement).value;
     const start = 5 * (page - 1);
     const end = 5 * page;
     setActorsToShow(persons.slice(start, end));
@@ -34,4 +34,5 @@ const Actors = ({ persons }: Props) => {
   );
 };
 
-export default Actors;
+const ActorsWithWrapper = withHeading(withNotFound(Actors));
+export default ActorsWithWrapper;

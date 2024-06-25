@@ -2,6 +2,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Movie } from '../../../types';
 import { Link } from 'react-router-dom';
+import { withHeading, withNotFound } from '../../../components/HOC';
 
 const responsive = {
   desktop: {
@@ -51,5 +52,5 @@ function SimilarMovies({ movies }: Props) {
     </Carousel>
   );
 }
-
-export default SimilarMovies;
+const SimilarMoviesWithWrapper = withHeading(withNotFound(SimilarMovies));
+export default SimilarMoviesWithWrapper;

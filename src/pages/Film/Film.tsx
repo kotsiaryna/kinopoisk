@@ -1,7 +1,6 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import { FilmByID } from '../../types';
 import Actors from './Actors/Actors';
-import NotFound from './NotFound/NotFound';
 import ReviewList from './Review/ReviewList';
 import SimilarMovies from './SimilarMovies/SimilarMovies';
 import Posters from './Posters/Posters';
@@ -32,26 +31,17 @@ function Film() {
       {poster && poster.previewUrl && <img src={poster.previewUrl} width="200" height="auto" />}
       <div>{description}</div>
       <div>{`Рейтинг: IMBD ${imdb}, KP ${kp}`}</div>
-      <div>
-        <h4>Актеры</h4>
-        {actors.length ? <Actors persons={persons} /> : <NotFound name="актерах" />}
-      </div>
-      <div>
-        <h4>Сезоны и серии</h4>
-        {isSeries ? <Seasons filmId={id} /> : <NotFound name="сезонах" />}
-      </div>
-      <div>
-        <h4>Постеры</h4>
-        <Posters filmId={id} />
-      </div>
-      <div>
-        <h4>Отзывы</h4>
-        <ReviewList filmID={id} />
-      </div>
-      <div>
-        <h4>Похожие фильмы</h4>
-        {similarMovies && <SimilarMovies movies={similarMovies} />}
-      </div>
+      <Actors persons={persons} heading="Актеры" notFound={actors.length === 0} name="актерах" />
+      <Seasons filmId={id} heading="Сезоны и серии" notFound={!isSeries} name="сезонах" />
+      <Posters filmId={id} heading="Постеры" />
+      <ReviewList filmID={id} heading="Отзывы" />
+      <SimilarMovies
+        movies={similarMovies}
+        heading="Похожие фильмы"
+        notFound={!similarMovies || similarMovies.length === 0}
+        name="фильмах"
+      />
+      ?
     </section>
   );
 }

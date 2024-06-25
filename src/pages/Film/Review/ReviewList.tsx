@@ -3,6 +3,8 @@ import { reviewByFilmId } from '../../../services/api';
 import ReviewItem from './Review';
 import { Pages } from '../Pages/Pages';
 import { ResponseData, Review } from '../../../types';
+import NotFound from '../NotFound/NotFound';
+import { withHeading } from '../../../components/HOC';
 
 type Props = {
   filmID: number;
@@ -39,9 +41,11 @@ function ReviewList({ filmID }: Props) {
     <>
       <div>
         {error && <p>Ошибка загрузки отзывов</p>}
-        {reviews &&
-          reviews.docs &&
-          reviews.docs.map((review, i) => <ReviewItem key={i} {...review} />)}
+        {reviews && reviews.docs ? (
+          reviews.docs.map((review, i) => <ReviewItem key={i} {...review} />)
+        ) : (
+          <NotFound name="отзывы" />
+        )}
       </div>
       {reviews && reviews.total > limit && (
         <Pages n={limit} length={reviews?.total || limit} onButtonClick={onPageClick} />
@@ -50,4 +54,6 @@ function ReviewList({ filmID }: Props) {
   );
 }
 
-export default ReviewList;
+const ReviewListWithHeading = withHeading(ReviewList);
+
+export default ReviewListWithHeading;

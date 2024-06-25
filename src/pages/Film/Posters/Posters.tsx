@@ -3,6 +3,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { postersByFilmId } from '../../../services/api';
 import { Poster } from '../../../types';
+import { withHeading, withNotFound } from '../../../components/HOC';
 
 type Props = {
   filmId: number;
@@ -26,6 +27,8 @@ const responsive = {
   },
 };
 
+const CarouselWithNotFound = withNotFound(Carousel);
+
 function Posters({ filmId }: Props) {
   const [posters, setPosters] = useState<Poster[] | null>(null);
 
@@ -39,32 +42,35 @@ function Posters({ filmId }: Props) {
   }, [filmId]);
   return (
     <>
-      {posters && (
-        <Carousel
-          swipeable={false}
-          draggable={false}
-          showDots={true}
-          responsive={responsive}
-          ssr={false}
-          infinite={true}
-          autoPlay={false}
-          keyBoardControl={true}
-          customTransition="all .5"
-          transitionDuration={500}
-          containerClass="carousel-container"
-          removeArrowOnDeviceType={['tablet', 'mobile']}
-          dotListClass="custom-dot-list-style"
-          itemClass="carousel-item-padding-40-px"
-        >
-          {posters.map((poster, i) => (
+      <CarouselWithNotFound
+        swipeable={false}
+        draggable={false}
+        showDots={true}
+        responsive={responsive}
+        ssr={false}
+        infinite={true}
+        autoPlay={false}
+        keyBoardControl={true}
+        customTransition="all .5"
+        transitionDuration={500}
+        containerClass="carousel-container"
+        removeArrowOnDeviceType={['tablet', 'mobile']}
+        dotListClass="custom-dot-list-style"
+        itemClass="carousel-item-padding-40-px"
+        notFound={!posters}
+        name="постерах"
+      >
+        {posters &&
+          posters.map((poster, i) => (
             <div key={i}>
               <img src={poster.previewUrl} width="auto" height="100px" />
             </div>
           ))}
-        </Carousel>
-      )}
+      </CarouselWithNotFound>
     </>
   );
 }
 
-export default Posters;
+const PostersWithHeading = withHeading(Posters);
+
+export default PostersWithHeading;

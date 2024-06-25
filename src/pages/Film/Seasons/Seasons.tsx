@@ -3,6 +3,7 @@ import { seasonsByFilmId } from '../../../services/api';
 import { ResponseData, Series } from '../../../types';
 import Season from './Season';
 import { Pages } from '../Pages/Pages';
+import { withHeading, withNotFound } from '../../../components/HOC';
 
 type Props = {
   filmId: number;
@@ -35,5 +36,5 @@ function Seasons({ filmId }: Props) {
     </>
   );
 }
-
-export default Seasons;
+const SeasonsWithWrapper = withHeading(withNotFound(Seasons));
+export default SeasonsWithWrapper;
