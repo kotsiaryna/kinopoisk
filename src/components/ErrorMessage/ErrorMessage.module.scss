@@ -1,0 +1,21 @@
+@import '../..//globals.scss';
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 80%;
+  padding: 20px;
+  margin: 0 auto;
+  border: 1px solid rgb(173, 2, 2);
+  border-radius: 10px;
+}
+.text {
+  font: 600 16px $font-heading;
+  letter-spacing: 0.2em;
+  text-align: center;
+}
+
+.message {
+  text-align: center;
+  line-height: 1.5em;
+}
