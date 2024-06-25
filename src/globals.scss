@@ -1,0 +1,45 @@
+$font-heading: 'LXGW WenKai Mono TC', monospace;
+$font-main: 'Roboto', sans-serif;
+
+$color-bg: #e7d7c1;
+$color-font: #32384d;
+
+$tablet: 800px;
+$mobile: 500px;
+
+@mixin filtersHeading {
+  font: 600 18px $font-heading;
+  letter-spacing: 0.1em;
+
+  @media screen and (max-width: $mobile) {
+    font-size: 16px;
+    width: 100%;
+  }
+}
+
+@mixin textInput {
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  padding: 2px 5px;
+  font-family: inherit;
+  font-size: 15px;
+  color: inherit;
+  &:focus {
+    outline: 0.5px solid $color-font;
+  }
+}
+
+@mixin filterWrapper {
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+  margin: 0;
+  @media screen and (max-width: $mobile) {
+    flex-wrap: wrap;
+    height: fit-content;
+  }
+}

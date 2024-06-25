@@ -1,6 +1,7 @@
 import { ChangeEventHandler, memo, useEffect, useState } from 'react';
 import { SetURLSearchParams } from 'react-router-dom';
 import useDebounce from '../../../hooks/useDebounce';
+import styles from './Search.module.scss';
 
 type Props = {
   search: string;
@@ -28,9 +29,9 @@ function Search({ search, changeQuery }: Props) {
   }, [debouncedValue]);
 
   return (
-    <label>
-      Search
-      <input type="search" value={value} onChange={handleChange} />
+    <label className={styles.label}>
+      <h5 className={styles.heading}>Искать фильм по названию</h5>
+      <input type="search" value={value} onChange={handleChange} className={styles.input} />
     </label>
   );
 }

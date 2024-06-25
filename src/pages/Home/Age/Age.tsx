@@ -1,5 +1,6 @@
 import { ChangeEventHandler, memo } from 'react';
 import { SetURLSearchParams } from 'react-router-dom';
+import styles from './Age.module.scss';
 
 type Props = {
   age: string[];
@@ -26,12 +27,18 @@ function Age({ age, changeQuery }: Props) {
   };
 
   return (
-    <div>
-      Возраст:
+    <div className={styles.wrapper}>
+      <p className={styles.heading}>Возрастные ограничения</p>
       {ages.map((el) => (
-        <label key={el}>
-          {`${el}+`}
-          <input type="checkbox" value={el} onChange={setAge} checked={age.includes(el)} />
+        <label key={el} className={styles.yearLabel}>
+          <span className={styles.heading}>{`${el}+`}</span>
+          <input
+            type="checkbox"
+            value={el}
+            onChange={setAge}
+            checked={age.includes(el)}
+            className={styles.input}
+          />
         </label>
       ))}
     </div>

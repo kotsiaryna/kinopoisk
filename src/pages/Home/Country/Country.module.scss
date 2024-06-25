@@ -1,0 +1,13 @@
+@import '../../../globals.scss';
+
+.label {
+  @include filterWrapper;
+}
+
+.heading {
+  @include filtersHeading;
+}
+.input {
+  @include textInput;
+  width: 300px;
+}

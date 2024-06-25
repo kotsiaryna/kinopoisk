@@ -1,0 +1,20 @@
+@import '../../../globals.scss';
+
+.wrapper {
+  @include filterWrapper;
+}
+
+.heading {
+  @include filtersHeading;
+}
+
+.input {
+  @include textInput;
+  width: 20px;
+  height: 20px;
+}
+.yearLabel {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}

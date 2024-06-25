@@ -1,0 +1,12 @@
+@import '../../../globals.scss';
+.label {
+  @include filterWrapper;
+}
+.heading {
+  @include filtersHeading;
+}
+
+.select {
+  @include textInput;
+  width: 50px;
+}

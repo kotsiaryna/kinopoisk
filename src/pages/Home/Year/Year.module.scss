@@ -1,0 +1,14 @@
+@import '../../../globals.scss';
+
+.wrapper {
+  @include filterWrapper;
+}
+
+.text {
+  @include filtersHeading;
+}
+.select {
+  @include textInput;
+  margin: 0 10px;
+  width: 70px;
+}

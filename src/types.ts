@@ -12,7 +12,7 @@ export interface Film {
   year: number;
   genres: { name: string }[];
   countries: { name: string }[];
-  poster?: {
+  poster: {
     previewUrl: string;
   };
 }

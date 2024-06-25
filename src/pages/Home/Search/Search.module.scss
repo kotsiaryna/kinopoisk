@@ -1,0 +1,17 @@
+@import '../../../globals.scss';
+
+.label {
+  @include filterWrapper;
+}
+
+.heading {
+  @include filtersHeading;
+}
+
+.input {
+  @include textInput;
+  width: 400px;
+  @media screen and (max-width: $mobile) {
+    width: 300px;
+  }
+}

@@ -10,6 +10,8 @@ import Year from './Year/Year';
 import Age from './Age/Age';
 import Country from './Country/Country';
 
+import styles from './Home.module.scss';
+
 function Home() {
   console.log('render Home');
   const [query, setQuery] = useSearchParams();
@@ -41,16 +43,22 @@ function Home() {
   }, [page, limit, search, year, ageRating, country]);
 
   return (
-    <>
-      <div>FILMS</div>
-      <Pagination query={query} changeQuery={setQuery} />
+    <main className={styles.main}>
+      <h1 className={styles.heading}>Найди свой фильм </h1>
+
       <Search search={search} changeQuery={changeQuery} />
-      <Year years={year} changeQuery={changeQuery} />
-      <Age age={ageRating} changeQuery={changeQuery} />
-      <Country country={country} changeQuery={changeQuery} />
-      <LimitPerPage limit={limit} changeQuery={changeQuery} />
+      <div className={styles.filters}>
+        <Country country={country} changeQuery={changeQuery} />
+        <Year years={year} changeQuery={changeQuery} />
+        <Age age={ageRating} changeQuery={changeQuery} />
+      </div>
+      <div className={styles.pages}>
+        <Pagination query={query} changeQuery={setQuery} />
+        <LimitPerPage limit={limit} changeQuery={changeQuery} />
+      </div>
+
       <FilmList />
-    </>
+    </main>
   );
 }
 

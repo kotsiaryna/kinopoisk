@@ -1,5 +1,6 @@
 import { ChangeEventHandler, memo } from 'react';
 import { SetURLSearchParams } from 'react-router-dom';
+import styles from './Year.module.scss';
 
 type OptionsListProps = {
   range: [number, number];
@@ -30,10 +31,9 @@ type YearItemProps = {
 
 const YearItem = ({ label, value, onChange, range }: YearItemProps) => {
   return (
-    <label>
-      {' '}
+    <label className={styles.text}>
       {label}
-      <select value={value} onChange={onChange}>
+      <select value={value} onChange={onChange} className={styles.select}>
         <OptionsList range={range} />
       </select>
     </label>
@@ -71,10 +71,10 @@ function Year({ years, changeQuery }: Props) {
   };
 
   return (
-    <div>
-      Год выпуска
+    <div className={styles.wrapper}>
+      <p className={styles.text}>Год выпуска</p>
       <YearItem
-        label="c"
+        label="c "
         value={startYear}
         onChange={setStartYear}
         range={[firstYear, +endYear || lastYear]}

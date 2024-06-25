@@ -1,6 +1,7 @@
 import { ChangeEventHandler, memo, useEffect, useState } from 'react';
 import { SetURLSearchParams } from 'react-router-dom';
 import useDebounce from '../../../hooks/useDebounce';
+import styles from './Country.module.scss';
 
 type Props = {
   country: string;
@@ -27,9 +28,9 @@ function Country({ country, changeQuery }: Props) {
     });
   }, [debouncedValue]);
   return (
-    <label>
-      Страна
-      <input type="search" value={value} onChange={handleChange} />
+    <label className={styles.label}>
+      <p className={styles.heading}>Страна</p>
+      <input type="search" value={value} onChange={handleChange} className={styles.input} />
     </label>
   );
 }
