@@ -4,6 +4,7 @@ import 'react-multi-carousel/lib/styles.css';
 import { postersByFilmId } from '../../../services/api';
 import { Poster } from '../../../types';
 import { withHeading, withNotFound } from '../../../components/HOC';
+import styles from './Posters.module.scss';
 
 type Props = {
   filmId: number;
@@ -12,7 +13,7 @@ type Props = {
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 8,
+    items: 6,
     slidesToSlide: 3, // optional, default to 1.
   },
   tablet: {
@@ -41,8 +42,9 @@ function Posters({ filmId }: Props) {
       .catch((er) => console.log(er));
   }, [filmId]);
   return (
-    <>
+    <div className={styles.wrapper}>
       <CarouselWithNotFound
+        renderDotsOutside={true}
         swipeable={false}
         draggable={false}
         showDots={true}
@@ -62,12 +64,10 @@ function Posters({ filmId }: Props) {
       >
         {posters &&
           posters.map((poster, i) => (
-            <div key={i}>
-              <img src={poster.previewUrl} width="auto" height="100px" />
-            </div>
+            <img key={i} src={poster.previewUrl} className={styles.poster} />
           ))}
       </CarouselWithNotFound>
-    </>
+    </div>
   );
 }
 

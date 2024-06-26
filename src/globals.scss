@@ -43,3 +43,9 @@ $mobile: 500px;
     height: fit-content;
   }
 }
+
+@mixin blockWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}

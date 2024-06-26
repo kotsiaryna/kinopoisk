@@ -1,0 +1,15 @@
+@import '../../../globals.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  font-size: 20px;
+}
+
+.curPage {
+  font-family: $font-heading;
+  font-weight: 600;
+}

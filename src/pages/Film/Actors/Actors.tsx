@@ -2,6 +2,16 @@ import { useState } from 'react';
 import { Person } from '../../../types';
 import { Pages } from '../Pages/Pages';
 import { withHeading, withNotFound } from '../../../components/HOC';
+import styles from './Actors.module.scss';
+
+const Actor = ({ name, photo }: Person) => {
+  return (
+    <div className={styles.actor}>
+      <img src={photo} className={styles.img} />
+      <p className={styles.name}>{name}</p>
+    </div>
+  );
+};
 
 type Props = {
   persons: Person[];
@@ -18,19 +28,16 @@ const Actors = ({ persons }: Props) => {
   };
 
   return (
-    <>
-      <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+    <div className={styles.wrapper}>
+      <div className={styles.actors}>
         {actorsToShow.map((actor, i) => (
-          <div key={i}>
-            <img src={actor.photo} width="100" height="auto" />
-            <p>{actor.name}</p>
-          </div>
+          <Actor key={i} {...actor} />
         ))}
       </div>
       {persons.length > limit && (
         <Pages n={limit} length={persons.length} onButtonClick={onPageClick} />
       )}
-    </>
+    </div>
   );
 };
 

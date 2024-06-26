@@ -1,0 +1,27 @@
+.review {
+  width: 100%;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.heading {
+  font-size: 16px;
+  letter-spacing: 0.05em;
+}
+
+.text {
+  line-height: 1.5em;
+}
+
+.meta {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-weight: 600;
+}

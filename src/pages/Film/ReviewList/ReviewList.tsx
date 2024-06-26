@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { reviewByFilmId } from '../../../services/api';
-import ReviewItem from './Review';
+import ReviewItem from './Review/Review';
 import { Pages } from '../Pages/Pages';
 import { ResponseData, Review } from '../../../types';
 import NotFound from '../NotFound/NotFound';
 import { withHeading } from '../../../components/HOC';
+import styles from './ReviewList.module.scss';
 
 type Props = {
   filmID: number;
@@ -38,8 +39,8 @@ function ReviewList({ filmID }: Props) {
   };
 
   return (
-    <>
-      <div>
+    <div className={styles.wrapper}>
+      <div className={styles.list}>
         {error && <p>Ошибка загрузки отзывов</p>}
         {reviews && reviews.docs ? (
           reviews.docs.map((review, i) => <ReviewItem key={i} {...review} />)
@@ -50,7 +51,7 @@ function ReviewList({ filmID }: Props) {
       {reviews && reviews.total > limit && (
         <Pages n={limit} length={reviews?.total || limit} onButtonClick={onPageClick} />
       )}
-    </>
+    </div>
   );
 }
 

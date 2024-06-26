@@ -1,0 +1,44 @@
+@import '../../../../globals.scss';
+
+.card {
+  width: 400px;
+  height: fit-content;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @media screen and (max-width: $mobile) {
+    width: 100%;
+  }
+}
+
+.heading {
+  font-size: 18px;
+  font-weight: 600;
+}
+.description {
+  text-align: justify;
+}
+.count {
+  font-size: 16px;
+}
+
+.button {
+  width: 200px;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  color: $color-bg;
+  background-color: $color-font;
+  align-self: center;
+  line-height: 30px;
+  letter-spacing: 0.05em;
+}
+
+.list {
+  margin-left: 20px;
+}
+.listItem {
+  margin-bottom: 5px;
+}

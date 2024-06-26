@@ -1,37 +1,45 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { seasonsByFilmId } from '../../../services/api';
-import { ResponseData, Series } from '../../../types';
-import Season from './Season';
+import { Series } from '../../../types';
+import Season from './Season/Season';
 import { Pages } from '../Pages/Pages';
 import { withHeading, withNotFound } from '../../../components/HOC';
+import styles from './Seasons.module.scss';
 
 type Props = {
   filmId: number;
 };
 function Seasons({ filmId }: Props) {
-  const limit = 1;
-  const [seasons, setSeasons] = useState<ResponseData<Series[]> | null>();
-  const [page, setPage] = useState(1);
+  const width = window.innerWidth;
+  const limit = width > 1200 ? 3 : width > 800 ? 2 : 1;
 
-  const onPageClick = (n: number) => {
-    setPage(n);
-    seasonsByFilmId(filmId, page)
-      .then((data) => setSeasons(data))
-      .catch((err) => console.log(err));
+  const allSeasons = useRef<Series[]>();
+  const [seasonsToShow, setSeasonsToShow] = useState<Series[] | null>();
+
+  const onPageClick = (page: number) => {
+    const start = limit * (page - 1);
+    const end = limit * page;
+    if (allSeasons.current) setSeasonsToShow(allSeasons.current.slice(start, end));
   };
 
   useEffect(() => {
-    seasonsByFilmId(filmId, page)
-      .then((data) => setSeasons(data))
+    seasonsByFilmId(filmId)
+      .then((data) => {
+        allSeasons.current = data?.docs.filter((season) => season.number).reverse();
+        if (allSeasons.current) setSeasonsToShow(allSeasons.current.slice(0, limit));
+      })
       .catch((err) => console.log(err));
-  }, [filmId, page]);
-  console.log(seasons);
+  }, []);
 
   return (
     <>
-      {seasons && seasons.docs.map((season, i) => <Season key={i} {...season} />)}
-      {seasons && seasons.pages > 1 && (
-        <Pages n={limit} length={seasons?.total || limit} onButtonClick={onPageClick} />
+      <div className={styles.seasons}>
+        {seasonsToShow &&
+          seasonsToShow.map((season, i) => season.number > 0 && <Season key={i} {...season} />)}
+      </div>
+
+      {allSeasons.current && allSeasons.current.length > limit && (
+        <Pages n={limit} length={allSeasons.current.length || limit} onButtonClick={onPageClick} />
       )}
     </>
   );

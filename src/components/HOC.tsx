@@ -1,5 +1,6 @@
 import { ComponentType, FC } from 'react';
 import NotFound from '../pages/Film/NotFound/NotFound';
+import Subtitle from './Subtitle/Subtitle';
 
 type WithHeadingProps = {
   heading: string;
@@ -14,7 +15,8 @@ export function withHeading<P extends object>(Component: ComponentType<P>) {
   const ComponentWithHeading: FC<P & WithHeadingProps> = ({ heading, ...props }) => {
     return (
       <div>
-        <h4>{heading}</h4>
+        {/* <h4>{heading}</h4> */}
+        <Subtitle text={heading} />
         <Component {...(props as P)} />
       </div>
     );

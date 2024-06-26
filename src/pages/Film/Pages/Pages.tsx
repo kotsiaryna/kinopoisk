@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Button from '../../../components/Button/Button';
+import styles from './Pages.module.scss';
 
 type PagesProps = {
   n: number;
@@ -13,7 +14,7 @@ export const Pages = ({ n, length, onButtonClick }: PagesProps) => {
   // const buttons = new Array(pagesNumber).fill(0);
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <Button
         text="<<"
         onClick={() => {
@@ -30,7 +31,7 @@ export const Pages = ({ n, length, onButtonClick }: PagesProps) => {
         }}
         disabled={activePage === 1}
       />
-      <span>{activePage}</span>
+      <span className={styles.curPage}>{activePage}</span>
       <Button
         text=">"
         onClick={() => {

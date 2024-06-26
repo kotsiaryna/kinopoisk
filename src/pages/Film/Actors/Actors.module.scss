@@ -1,0 +1,28 @@
+@import '../../../globals.scss';
+
+.wrapper {
+  @include blockWrapper;
+}
+.actors {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+  // gap: 20px;
+}
+
+.actor {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.img {
+  width: fit-content;
+  height: 200px;
+}
+
+.name {
+  font-weight: 600;
+  text-align: center;
+}
