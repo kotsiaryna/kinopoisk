@@ -30,9 +30,9 @@ export const filmById: LoaderFunction<string> = async ({ params }) => {
   }
 };
 
-export const reviewByFilmId = async (id: number, page: number) => {
+export const reviewByFilmId = async (id: number, page: number, limit: number) => {
   try {
-    const resp = await axios.get(`${URL}/review?page=${page}&limit=${5}&movieId=${id}`, {
+    const resp = await axios.get(`${URL}/review?page=${page}&limit=${limit}&movieId=${id}`, {
       headers,
     });
     const data = await resp.data;
@@ -66,9 +66,9 @@ export const postersByFilmId = async (id: number) => {
   }
 };
 
-export const seasonsByFilmId = async (id: number, page: number) => {
+export const seasonsByFilmId = async (id: number) => {
   try {
-    const resp = await axios.get(`${URL}/season?page=${page}&limit=1&movieId=${id}`, {
+    const resp = await axios.get(`${URL}/season?page=1&limit=100&movieId=${id}`, {
       headers,
     });
     const data = await resp.data;

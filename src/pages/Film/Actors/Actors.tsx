@@ -18,12 +18,13 @@ type Props = {
 };
 
 const Actors = ({ persons }: Props) => {
-  const limit = 5;
+  const width = window.innerWidth;
+  const limit = width > 1200 ? 7 : width > 900 ? 5 : width > 500 ? 3 : 1;
   const [actorsToShow, setActorsToShow] = useState(persons.slice(0, limit));
 
   const onPageClick = (page: number) => {
-    const start = 5 * (page - 1);
-    const end = 5 * page;
+    const start = limit * (page - 1);
+    const end = limit * page;
     setActorsToShow(persons.slice(start, end));
   };
 

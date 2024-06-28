@@ -12,14 +12,15 @@ type Props = {
 };
 
 function ReviewList({ filmID }: Props) {
-  const limit = 5;
+  const width = window.innerWidth;
+  const limit = width > 1200 ? 5 : width > 800 ? 3 : 1;
   const [reviews, setReviews] = useState<ResponseData<Review[]> | null>(null);
   const [error, setError] = useState(false);
 
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    reviewByFilmId(filmID, page)
+    reviewByFilmId(filmID, page, limit)
       .then((reviews) => {
         if (reviews) setReviews(reviews);
         setError(false);
@@ -29,7 +30,7 @@ function ReviewList({ filmID }: Props) {
 
   const onPageClick = (n: number) => {
     setPage(n);
-    reviewByFilmId(filmID, n)
+    reviewByFilmId(filmID, n, limit)
       .then((reviews) => {
         console.log(reviews);
         if (reviews) setReviews(reviews);

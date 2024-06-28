@@ -14,17 +14,18 @@ const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 6,
-    slidesToSlide: 3, // optional, default to 1.
+  },
+  wideTablet: {
+    breakpoint: { max: 1024, min: 800 },
+    items: 5,
   },
   tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 5,
-    slidesToSlide: 2, // optional, default to 1.
+    breakpoint: { max: 1024, min: 500 },
+    items: 3,
   },
   mobile: {
-    breakpoint: { max: 464, min: 0 },
+    breakpoint: { max: 500, min: 0 },
     items: 1,
-    slidesToSlide: 1, // optional, default to 1.
   },
 };
 
@@ -45,7 +46,7 @@ function Posters({ filmId }: Props) {
     <div className={styles.wrapper}>
       <CarouselWithNotFound
         renderDotsOutside={true}
-        swipeable={false}
+        swipeable={true}
         draggable={false}
         showDots={true}
         responsive={responsive}
@@ -57,8 +58,8 @@ function Posters({ filmId }: Props) {
         transitionDuration={500}
         containerClass="carousel-container"
         removeArrowOnDeviceType={['tablet', 'mobile']}
-        dotListClass="custom-dot-list-style"
-        itemClass="carousel-item-padding-40-px"
+        // dotListClass="custom-dot-list-style"
+        // itemClass="carousel-item-padding-40-px"
         notFound={!posters}
         name="постерах"
       >
