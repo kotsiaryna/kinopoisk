@@ -29,18 +29,23 @@ function Film() {
   return (
     <section className={styles.wrapper}>
       <Link to={`/${query}`} className={styles.link}>
-        На главную
+        {`<-- На главную`}
       </Link>
       <h2 className={styles.heading}>{name}</h2>
-      {poster && poster.previewUrl && <img src={poster.previewUrl} className={styles.img} />}
-      <div className={styles.text}>{description}</div>
-      <div className={styles.rate}>
-        <h4 className={styles.h4}>Рейтинг</h4>
-        <p>
-          IMBD:
-          {imdb} KP: {kp}
-        </p>
+      <div className={styles.info}>
+        {poster && poster.previewUrl && <img src={poster.previewUrl} className={styles.img} />}
+        <div className={styles.infoBlock}>
+          <div className={styles.text}>{description}</div>
+          <div className={styles.rate}>
+            <h4 className={styles.h4}>Рейтинг</h4>
+            <p>
+              IMBD:
+              {imdb} KP: {kp}
+            </p>
+          </div>
+        </div>
       </div>
+
       <Actors persons={persons} heading="Актеры" notFound={actors.length === 0} name="актерах" />
       <Seasons filmId={id} heading="Сезоны и серии" notFound={!isSeries} name="сезонах" />
       <Posters filmId={id} heading="Постеры" />
@@ -51,7 +56,6 @@ function Film() {
         notFound={!similarMovies || similarMovies.length === 0}
         name="фильмах"
       />
-      ?
     </section>
   );
 }
